@@ -1,0 +1,24 @@
+.link {
+  display: block;
+  text-decoration: none;
+  color: var(--mantine-color-text);
+  line-height: 1.2;
+  font-size: var(--mantine-font-size-sm);
+  padding: var(--mantine-spacing-xs);
+  width: 180;
+  border-radius: 4;
+
+  @mixin hover {
+    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+  }
+}
+
+.linkActive {
+  font-weight: 500;
+  color: var(--mantine-color-white);
+
+  &,
+  &:hover {
+    background-color: var(--hover-color) !important;
+  }
+}

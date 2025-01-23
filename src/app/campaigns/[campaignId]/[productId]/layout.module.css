@@ -1,0 +1,43 @@
+.list {
+  position: relative;
+  margin-bottom: var(--mantine-spacing-md);
+  display: flex;
+  gap: var(--mantine-spacing-xl);
+
+  @media (max-width: 768px) {
+    gap: var(--mantine-spacing-xs);
+  }
+}
+
+.indicator {
+  background-color: var(--fundraiser-indicator-background-color);
+  border-radius: var(--mantine-radius-xl);
+  border: 1px solid var(--mantine-color-gray-2);
+  box-shadow: var(--mantine-shadow-sm);
+  padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);
+
+  @mixin dark {
+    background-color: var(--mantine-color-dark-6);
+    border-color: var(--mantine-color-dark-4);
+  }
+}
+
+.tab {
+  z-index: 1;
+  font-weight: 500;
+  transition: color 100ms ease;
+  color: var(--mantine-color-gray-7);
+  padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);
+
+  &[data-active] {
+    color: var(--mantine-color-white);
+  }
+
+  @mixin dark {
+    color: var(--mantine-color-dark-1);
+
+    &[data-active] {
+      color: var(--mantine-color-white);
+    }
+  }
+}

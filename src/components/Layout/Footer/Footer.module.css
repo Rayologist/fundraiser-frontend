@@ -1,0 +1,40 @@
+$footer-breakpoint-tablet: 62.5em;
+$footer-breakpoint-mobile: 40em;
+
+.root {
+  --footer-height: 200px;
+  /* background-color: var(--mantine-color-gray-5); */
+
+  /* @media (max-width: $footer-breakpoint-tablet) {
+    --footer-height: 150px;
+  }
+
+  @media (max-width: $footer-breakpoint-mobile) {
+    --footer-height: 150px;
+  } */
+}
+
+.spacer {
+  height: var(--footer-height);
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  @media (max-width: $footer-breakpoint-tablet) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  height: var(--footer-height);
+  background-color: var(--mantine-color-gray-0);
+}
