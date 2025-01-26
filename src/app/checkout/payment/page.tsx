@@ -24,7 +24,8 @@ export default function PaymentPage() {
   }, []);
 
   if (!newebpayData) {
-    return router.push('/checkout/cart');
+    router.push('/checkout/cart');
+    return null;
   }
 
   return (

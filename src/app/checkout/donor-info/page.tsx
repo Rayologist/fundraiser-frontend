@@ -16,7 +16,8 @@ export default function DonorInfoPage() {
   const id = useId();
 
   if (!cartDto) {
-    return router.push('/checkout/cart');
+    router.push('/checkout/cart');
+    return null;
   }
 
   return (

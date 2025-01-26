@@ -34,7 +34,8 @@ export default function ReviewPage() {
   );
 
   if (!cartDto || !donorInfo) {
-    return router.push('/checkout/cart');
+    router.push('/checkout/cart');
+    return null;
   }
 
   const w = useMatches({
