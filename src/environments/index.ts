@@ -1,19 +1,19 @@
 const config = {
   dev: {
-    serverUrl: 'https://adhoc.ioltw.org/api',
-    // serverUrl: 'http://localhost/api',
+    // serverUrl: 'https://adhoc.ioltw.org/api',
+    serverUrl: 'http://localhost/api',
     internalUrl: 'http://backend',
   },
   production: {
     serverUrl: 'https://fund.langcute.org/api',
-    internalUrl: 'https://backend/api',
+    internalUrl: 'https://backend:3000',
   },
 };
 
 let env = config.dev;
 
 if (process.env.NODE_ENV === 'production') {
-  env = config.dev;
+  env = config.production;
 }
 
 export default env;
