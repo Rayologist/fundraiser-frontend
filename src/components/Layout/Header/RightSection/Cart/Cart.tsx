@@ -13,8 +13,9 @@ import {
   Popover,
   Stack,
   Text,
+  useMatches,
 } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { useDisclosure, useViewportSize } from '@mantine/hooks';
 import { currencyFormatter } from '@/libs/formatter/number.formatter';
 import { useCart, useClearCart } from '@/services/cart/client';
 import { CartDto } from '@/services/cart/types';
@@ -24,6 +25,11 @@ export function Cart() {
   const { data, isLoading } = useCart();
   const user = useUserStore((state) => state.user);
   const [opened, { close, toggle }] = useDisclosure();
+  const { width } = useViewportSize();
+  const w = useMatches({
+    base: width - 10,
+    md: 325,
+  });
 
   if (!user) {
     return null;
@@ -36,7 +42,7 @@ export function Cart() {
   const [cart] = data;
 
   return (
-    <Popover width={300} radius="md" opened={opened} onChange={toggle}>
+    <Popover width={300} radius="md" opened={opened} onChange={toggle} withArrow>
       <Popover.Target>
         <Box>
           <CartCount count={cart?.cartItems.length}>
@@ -49,10 +55,12 @@ export function Cart() {
         </Box>
       </Popover.Target>
 
-      <Popover.Dropdown pb={25}>
+      <Popover.Dropdown pb={25} w={w}>
         <Stack>
           <Group gap="md">
-            <Text size="lg">捐贈清單</Text>
+            <Text size="xl" fw={500}>
+              捐贈清單
+            </Text>
           </Group>
           <CartItemList cart={cart} onButtonClick={close} />
         </Stack>

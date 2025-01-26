@@ -3,9 +3,11 @@
 import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { IconLogout2, IconSearch } from '@tabler/icons-react';
-import { Avatar, Menu, rem } from '@mantine/core';
+import { Avatar, Group, Menu, rem, Text, UnstyledButton, useMatches } from '@mantine/core';
+import { useViewportSize } from '@mantine/hooks';
 import { deleteSession, useSession } from '@/services/session/client';
 import { useUserStore } from '@/stores/user.store';
+import classes from './UserAvatar.module.css';
 
 export function UserAvatar() {
   const user = useUserStore((state) => state.user);
@@ -15,6 +17,11 @@ export function UserAvatar() {
   const searchParams = useSearchParams();
   const type = searchParams.get('type');
   const { data } = useSession({ enabled: user === null && type === 'authenticated' });
+  const { width } = useViewportSize();
+  const w = useMatches({
+    base: width - 10,
+    md: 265,
+  });
 
   useEffect(() => {
     if (!data) {
@@ -28,22 +35,28 @@ export function UserAvatar() {
     }
   }, [data]);
 
+  const avatar = <Avatar src={user?.picture ?? null} size="md" radius="xl" />;
+
   return (
-    <Menu shadow="md" width={150}>
+    <Menu shadow="md" withArrow>
       <Menu.Target>
-        <Avatar
-          src={user?.picture ?? null}
-          size="md"
-          radius="xl"
-          style={{
-            cursor: 'pointer',
-            border: '2px solid #fff',
-            boxShadow: '0 0 0 2px #fff',
-          }}
-        />
+        <UnstyledButton className={classes.button}>{avatar}</UnstyledButton>
       </Menu.Target>
 
-      <Menu.Dropdown>
+      <Menu.Dropdown w={w}>
+        <Group p={10}>
+          {avatar}
+          <div style={{ flex: 1 }}>
+            <Text size="sm" fw={500}>
+              {getName({ firstName: user?.firstName, lastName: user?.lastName })}
+            </Text>
+
+            <Text c="dimmed" size="xs">
+              {user?.email}
+            </Text>
+          </div>
+        </Group>
+        <Menu.Divider />
         <Menu.Item
           leftSection={<IconSearch style={{ width: rem(14), height: rem(14) }} />}
           onClick={() => {
@@ -64,4 +77,15 @@ export function UserAvatar() {
       </Menu.Dropdown>
     </Menu>
   );
+}
+
+function getName(args: { firstName?: string; lastName?: string }) {
+  const isEnglish =
+    /^[a-zA-Z]*$/.test(args.firstName ?? '') && /^[a-zA-Z]*$/.test(args.lastName ?? '');
+
+  if (isEnglish) {
+    return `${args.firstName} ${args.lastName}`;
+  }
+
+  return `${args.lastName}${args.firstName}`;
 }

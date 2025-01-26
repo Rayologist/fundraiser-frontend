@@ -1,0 +1,7 @@
+.button {
+  padding: 8;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+  }
+}
