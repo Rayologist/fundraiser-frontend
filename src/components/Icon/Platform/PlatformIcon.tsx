@@ -14,7 +14,7 @@ export function PlatformIcon() {
           router.push('/');
         }
       }}
-      px={8}
+      px={0}
       c="gray"
     >
       台灣語言文化與資訊協會
