@@ -47,15 +47,13 @@ export default function ProductLayout(props: { children: React.ReactNode }) {
       }}
     >
       <Stack mb={50} gap={35}>
-        <Group align="flex-start">
+        <Group align="center">
           <Tooltip label="返回上一頁" withArrow>
-            <ActionIcon mb={20} radius="xl" variant="subtle" size="lg" color={campaignColorPrimary}>
+            <ActionIcon radius="xl" variant="subtle" size="lg" color={campaignColorPrimary}>
               <IconArrowLeft onClick={() => redirect(`/campaigns/${campaignId}`)} />
             </ActionIcon>
           </Tooltip>
-          <Title order={3} mt={1}>
-            {campaign.title}
-          </Title>
+          <Title order={2}>{campaign.title}</Title>
         </Group>
 
         <Box>
