@@ -85,7 +85,6 @@ export default function CartPage() {
       </Title>
       <Stack mb={10}>
         <CartTable cart={cartData} />
-        <Divider />
       </Stack>
       <Group>
         <Title order={2}>總計 {currencyFormatter.format(cartData.amount)}</Title>

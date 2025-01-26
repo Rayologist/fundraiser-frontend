@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useShallow } from 'zustand/shallow';
-import { Button, Center, Checkbox, Divider, Group, Stack, Title, useMatches } from '@mantine/core';
+import { Button, Center, Checkbox, Group, Stack, Title, useMatches } from '@mantine/core';
 import { DonorInfo } from '@/components/DonorInfo/DonorInfo';
 import { LineItemTable } from '@/containers/Record/LineItemTable';
 import { currencyFormatter } from '@/libs/formatter/number.formatter';
@@ -34,7 +34,7 @@ export default function ReviewPage() {
   });
 
   return (
-    <Stack>
+    <Stack gap={50}>
       <Stack>
         <Title order={1} c="blue.9">
           捐款金額
@@ -42,7 +42,6 @@ export default function ReviewPage() {
         <Title order={2}>總金額 {currencyFormatter.format(cartDto.amount)}</Title>
         <LineItemTable data={cartDto.cartItems} />
       </Stack>
-      <Divider my="lg" />
 
       <DonorInfo donorInfo={donorInfo} />
       <Stack gap="md">

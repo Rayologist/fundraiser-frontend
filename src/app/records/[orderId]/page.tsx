@@ -1,9 +1,20 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { useParams } from 'next/navigation';
-import { IconRepeat } from '@tabler/icons-react';
-import { Button, Center, Divider, Group, Loader, rem, Stack, Text, Title } from '@mantine/core';
+import { redirect, useParams } from 'next/navigation';
+import { IconArrowLeft, IconRepeat } from '@tabler/icons-react';
+import {
+  ActionIcon,
+  Button,
+  Center,
+  Group,
+  Loader,
+  rem,
+  Stack,
+  Text,
+  Title,
+  Tooltip,
+} from '@mantine/core';
 import { DonorInfo } from '@/components/DonorInfo/DonorInfo';
 import { PaymentForm } from '@/components/Newebpay/NewebpayForm';
 import { LineItemTable } from '@/containers/Record/LineItemTable';
@@ -75,17 +86,13 @@ export default function OrderDetailPage() {
         </Stack>
         <PaymentTable data={details.payments} />
       </Stack>
-      <Divider />
       <Stack>
         <Title order={1} c="blue.9">
           捐款明細
         </Title>
         <Title order={3}>總計 {currencyFormatter.format(details.amount)}</Title>
-        <Stack gap={3}>
-          <LineItemTable data={details.orderItems} />
-        </Stack>
+        <LineItemTable data={details.orderItems} />
       </Stack>
-      <Divider />
       <DonorInfo donorInfo={details.donorInfo} />
       <PaymentForm ref={ref} data={newebpayData} />
     </Stack>
