@@ -55,6 +55,11 @@ export default function OrderDetailPage() {
     <Stack gap="xl">
       <Stack gap="xl">
         <Stack gap="sm">
+          <Tooltip label="返回上一頁" withArrow>
+            <ActionIcon radius="xl" variant="subtle" size="lg">
+              <IconArrowLeft onClick={() => redirect(`/records`)} />
+            </ActionIcon>
+          </Tooltip>
           <Group justify="space-between" align="flex-end">
             <Title order={1} c="blue.9">
               付款資料
