@@ -65,7 +65,9 @@ export default function RecordPage() {
 
   return (
     <Stack gap="xl">
-      <Title order={1}>捐款紀錄</Title>
+      <Title order={1} c="blue.9">
+        捐款紀錄
+      </Title>
       <Table columns={columns} data={record} maxHeight={600} />
       <Center>
         <Button w={w} variant="outline" fullWidth onClick={() => router.push('/')}>
