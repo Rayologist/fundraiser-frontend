@@ -10,13 +10,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-left: 48px;
-  padding-right: 48px;
-
-  @media (max-width: 768px) {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .content {
