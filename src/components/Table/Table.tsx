@@ -1,10 +1,10 @@
 'use client';
 
 import {
+  Center,
   Table as MantineTable,
   ScrollAreaAutosize,
   ScrollAreaAutosizeProps,
-  StyleProp,
   TableTbody,
   TableTd,
   TableTh,
@@ -29,6 +29,7 @@ export function Table<T extends Record<string, any>>(props: {
   data: T[];
   maxHeight?: ScrollAreaAutosizeProps['mah'];
   maxWidth?: ScrollAreaAutosizeProps['maw'];
+  cellHeight?: number;
 }) {
   const { columns, data } = props;
   const rows = data.map((row, index) => {
@@ -40,7 +41,7 @@ export function Table<T extends Record<string, any>>(props: {
             : () => row[column?.key ?? ''];
 
           return (
-            <TableTd key={`${index}-${column.header}`} style={{ height: 80 }}>
+            <TableTd key={`${index}-${column.header}`} style={{ height: props.cellHeight ?? 80 }}>
               <CellComponent />
             </TableTd>
           );
@@ -49,8 +50,16 @@ export function Table<T extends Record<string, any>>(props: {
     );
   });
 
+  const emptyRow = (
+    <TableTr h={50}>
+      <TableTd colSpan={columns.length}>
+        <Center>---</Center>
+      </TableTd>
+    </TableTr>
+  );
+
   return (
-    <ScrollAreaAutosize mah={props.maxHeight ?? 500} maw={props.maxWidth ?? '100vw'} type="always">
+    <ScrollAreaAutosize mah={props.maxHeight ?? 500} maw={props.maxWidth ?? '100vw'} type="auto">
       <MantineTable>
         <TableThead>
           <TableTr style={{ backgroundColor: 'var(--mantine-color-gray-1)' }}>
@@ -65,7 +74,7 @@ export function Table<T extends Record<string, any>>(props: {
             ))}
           </TableTr>
         </TableThead>
-        <TableTbody>{rows}</TableTbody>
+        <TableTbody>{rows.length === 0 ? emptyRow : rows}</TableTbody>
       </MantineTable>
     </ScrollAreaAutosize>
   );
