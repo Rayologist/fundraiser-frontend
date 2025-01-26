@@ -7,11 +7,7 @@ import classes from './AppShell.module.css';
 export function Layout(props: { children: React.ReactNode }) {
   return (
     <AppShell header={{ height: 80 }}>
-      <AppShellHeader
-        pr="xl"
-        pl="md"
-        style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
-      >
+      <AppShellHeader className={classes.header}>
         <LeftSection />
         <RightSection />
       </AppShellHeader>
