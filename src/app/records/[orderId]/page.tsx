@@ -6,14 +6,13 @@ import { IconRepeat } from '@tabler/icons-react';
 import { Button, Center, Divider, Group, Loader, rem, Stack, Text, Title } from '@mantine/core';
 import { DonorInfo } from '@/components/DonorInfo/DonorInfo';
 import { PaymentForm } from '@/components/Newebpay/NewebpayForm';
-import { PaymentStatus } from '@/components/PaymentStatus/PaymentStatus';
-import { createColumns, Table } from '@/components/Table/Table';
+import { LineItemTable } from '@/containers/Record/LineItemTable';
+import { PaymentTable } from '@/containers/Record/PaymentTable';
 import { PaymentStatus as Status } from '@/libs/entities/payment.entity';
 import { currencyFormatter } from '@/libs/formatter/number.formatter';
 import { checkoutById } from '@/services/payment/client';
 import { NewebpayData } from '@/services/payment/types';
 import { useRecordDetails } from '@/services/record/client';
-import { OrderDetailsView } from '@/services/record/types';
 
 export default function OrderDetailPage() {
   const { orderId } = useParams<{ orderId: string }>();
@@ -74,7 +73,7 @@ export default function OrderDetailPage() {
             除信用卡外，其他繳費方式需等待 3 至 5 個工作天入帳。
           </Text>
         </Stack>
-        <Table columns={columns} data={details.payments} />
+        <PaymentTable data={details.payments} />
       </Stack>
       <Divider />
       <Stack>
@@ -83,17 +82,7 @@ export default function OrderDetailPage() {
         </Title>
         <Title order={3}>總計 {currencyFormatter.format(details.amount)}</Title>
         <Stack gap={3}>
-          {details.orderItems.map((item) => (
-            <Group key={item.id} justify="space-between">
-              <Text
-                component="div"
-                size="md"
-              >{`${item.product.title} (${item.product.campaign.title})`}</Text>
-              <Text component="div" size="md" w={100}>
-                {currencyFormatter.format(item.price)}
-              </Text>
-            </Group>
-          ))}
+          <LineItemTable data={details.orderItems} />
         </Stack>
       </Stack>
       <Divider />
@@ -102,32 +91,3 @@ export default function OrderDetailPage() {
     </Stack>
   );
 }
-
-const columns = createColumns<OrderDetailsView['payments'][0]>([
-  {
-    key: 'id',
-    header: '捐款編號',
-  },
-  {
-    key: 'transactionId',
-    header: '交易序號',
-  },
-  {
-    key: 'transactedAt',
-    header: '交易時間',
-    cell: ({ data }) => {
-      if (!data.transactedAt) return '無';
-      return <>{new Date(data.transactedAt).toLocaleString('sv')}</>;
-    },
-  },
-  {
-    key: 'method',
-    header: '捐款方式',
-    width: 500,
-  },
-  {
-    key: 'status',
-    header: '捐款狀態',
-    cell: ({ data }) => <PaymentStatus status={data.status} />,
-  },
-]);

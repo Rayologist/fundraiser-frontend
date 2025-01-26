@@ -1,21 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useShallow } from 'zustand/shallow';
-import {
-  Button,
-  Center,
-  Checkbox,
-  Divider,
-  Group,
-  Stack,
-  Text,
-  Title,
-  useMatches,
-} from '@mantine/core';
+import { Button, Center, Checkbox, Divider, Group, Stack, Title, useMatches } from '@mantine/core';
 import { DonorInfo } from '@/components/DonorInfo/DonorInfo';
-import { createColumns, Table } from '@/components/Table/Table';
+import { LineItemTable } from '@/containers/Record/LineItemTable';
 import { currencyFormatter } from '@/libs/formatter/number.formatter';
 import { useCheckout } from '@/services/payment/client';
 import { useCheckoutStore } from '@/stores/checkout.store';
@@ -50,14 +40,7 @@ export default function ReviewPage() {
           捐款金額
         </Title>
         <Title order={2}>總金額 {currencyFormatter.format(cartDto.amount)}</Title>
-        <Table
-          columns={columns}
-          data={cartDto.cartItems.map((c) => ({
-            title: `${c.product.title} (${c.product.campaign.title})`,
-            price: c.price,
-          }))}
-          maxHeight='100vh'
-        />
+        <LineItemTable data={cartDto.cartItems} />
       </Stack>
       <Divider my="lg" />
 
@@ -106,18 +89,3 @@ export default function ReviewPage() {
     </Stack>
   );
 }
-
-const columns = createColumns<{ title: string; price: number }>([
-  {
-    header: '項目名稱',
-    cell({ data }) {
-      return <Text>{data.title}</Text>;
-    },
-  },
-  {
-    header: '捐款金額',
-    cell({ data }) {
-      return <Text>{currencyFormatter.format(data.price)}</Text>;
-    },
-  },
-]);
