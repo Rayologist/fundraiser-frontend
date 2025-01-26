@@ -26,7 +26,7 @@ import classes from './layout.module.css';
 export default function ProductLayout(props: { children: React.ReactNode }) {
   const { campaignId, productId } = useParams<{ campaignId?: string; productId?: string }>();
   const router = useRouter();
-  const autoplay = useRef(Autoplay({ delay: 5000 }));
+  const autoplay = useRef(Autoplay({ delay: 2000 }));
 
   const campaignColorPrimary = useCampaignStore((state) => state.campaign.config.color.primary);
   const products = useCampaignStore(useShallow((state) => state.products));
