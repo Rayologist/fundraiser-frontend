@@ -57,49 +57,6 @@ export default function ProductLayout(props: { children: React.ReactNode }) {
             {campaign.title}
           </Title>
         </Group>
-        <Tabs variant="none" value={value} onChange={setValue}>
-          <Tabs.List ref={setRootRef} className={classes.list}>
-            {products
-              .filter((p) => p.goalAmount !== 0)
-              .map((product) => (
-                <Tabs.Tab
-                  key={product.id}
-                  value={product.id}
-                  ref={setControlRef(product.id)}
-                  className={classes.tab}
-                  styles={{
-                    tab: {
-                      borderRadius: '2rem',
-                      backgroundColor:
-                        productId !== product.id ? alpha('#aaa', 0.1) : 'transparent',
-                    },
-                  }}
-                  onClick={() => router.push(`/campaigns/${campaignId}/${product.id}`)}
-                >
-                  <Group gap="xs">
-                    <Center
-                      style={{
-                        borderRadius: '50%',
-                        border: `2px solid `,
-                        width: 20,
-                        height: 20,
-                        padding: 1,
-                      }}
-                    >
-                      <IconFlag3 size={16} stroke={3} />
-                    </Center>
-                    <Text>{product.title}</Text>
-                  </Group>
-                </Tabs.Tab>
-              ))}
-
-            <FloatingIndicator
-              target={value ? controlsRefs[value] : null}
-              parent={rootRef}
-              className={classes.indicator}
-            />
-          </Tabs.List>
-        </Tabs>
 
         <Box>
           <Carousel
@@ -126,6 +83,49 @@ export default function ProductLayout(props: { children: React.ReactNode }) {
           <Text fz="lg">{campaign.longDescription}</Text>
         </Box>
       </Stack>
+
+      <Tabs variant="none" value={value} onChange={setValue}>
+        <Tabs.List ref={setRootRef} className={classes.list}>
+          {products
+            .filter((p) => p.goalAmount !== 0)
+            .map((product) => (
+              <Tabs.Tab
+                key={product.id}
+                value={product.id}
+                ref={setControlRef(product.id)}
+                className={classes.tab}
+                styles={{
+                  tab: {
+                    borderRadius: '2rem',
+                    backgroundColor: productId !== product.id ? alpha('#aaa', 0.1) : 'transparent',
+                  },
+                }}
+                onClick={() => router.push(`/campaigns/${campaignId}/${product.id}`)}
+              >
+                <Group gap="xs">
+                  <Center
+                    style={{
+                      borderRadius: '50%',
+                      border: `2px solid `,
+                      width: 20,
+                      height: 20,
+                      padding: 1,
+                    }}
+                  >
+                    <IconFlag3 size={16} stroke={3} />
+                  </Center>
+                  <Text>{product.title}</Text>
+                </Group>
+              </Tabs.Tab>
+            ))}
+
+          <FloatingIndicator
+            target={value ? controlsRefs[value] : null}
+            parent={rootRef}
+            className={classes.indicator}
+          />
+        </Tabs.List>
+      </Tabs>
 
       {props.children}
     </Box>
