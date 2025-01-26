@@ -6,7 +6,7 @@ const config = {
   },
   production: {
     serverUrl: 'https://fund.langcute.org/api',
-    internalUrl: 'https://backend:3000',
+    internalUrl: 'http://backend:3000',
   },
 };
 
