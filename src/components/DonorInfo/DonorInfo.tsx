@@ -62,7 +62,7 @@ export function DonorInfo(props: { donorInfo: DonorInfoType }) {
           return (
             <Stack key={i.title} gap={0}>
               <Title order={4}>{i.title}</Title>
-              <Text size="md" c="dimmed">
+              <Text size="md" c="dimmed" component="div">
                 {i.content}
               </Text>
             </Stack>
