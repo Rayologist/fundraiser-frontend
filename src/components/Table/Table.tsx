@@ -32,6 +32,7 @@ export function Table<T extends Record<string, any>>(props: {
   cellHeight?: number;
 }) {
   const { columns, data } = props;
+  const headerHeight = 40;
   const rows = data.map((row, index) => {
     return (
       <TableTr key={`${index}-${row.id}`}>
@@ -59,10 +60,31 @@ export function Table<T extends Record<string, any>>(props: {
   );
 
   return (
-    <ScrollAreaAutosize mah={props.maxHeight ?? 500} maw={props.maxWidth ?? '100vw'} type="auto">
-      <MantineTable>
-        <TableThead>
-          <TableTr style={{ backgroundColor: 'var(--mantine-color-gray-1)' }}>
+    <ScrollAreaAutosize
+      mah={props.maxHeight ?? 500}
+      maw={props.maxWidth ?? '100vw'}
+      type="auto"
+      styles={{
+        scrollbar: {
+          paddingTop: headerHeight + 2,
+        },
+      }}
+    >
+      <MantineTable
+        style={{
+          borderBottom: '1px solid var(--mantine-color-gray-2)',
+        }}
+      >
+        <TableThead
+          style={{
+            backgroundColor: 'var(--mantine-color-gray-1)',
+            position: 'sticky',
+            top: 0,
+            zIndex: 10,
+            height: headerHeight,
+          }}
+        >
+          <TableTr style={{ position: 'sticky', top: 0 }}>
             {columns.map((column, index) => (
               <TableTh
                 key={column.key || index}
