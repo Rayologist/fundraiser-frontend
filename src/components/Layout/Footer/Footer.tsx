@@ -6,7 +6,7 @@ import classes from './Footer.module.css';
 const info = {
   電子郵件地址: 'langcutech@gmail.com',
   地址: '臺北市大安區羅斯福路三段29號6樓',
-  電話: '(02) 3366-4104 #311',
+  電話: '(02) 3366-4105',
 } as const;
 
 export function Footer() {
