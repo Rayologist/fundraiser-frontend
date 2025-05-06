@@ -2,7 +2,7 @@ const config = {
   dev: {
     // serverUrl: 'https://adhoc.ioltw.org/api',
     serverUrl: 'http://localhost/api',
-    internalUrl: 'http://backend',
+    internalUrl: 'http://backend:3000',
   },
   production: {
     serverUrl: 'https://fund.langcute.org/api',

@@ -6,7 +6,18 @@ import { IconArrowLeft, IconHandClick } from '@tabler/icons-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { useShallow } from 'zustand/shallow';
 import { Carousel } from '@mantine/carousel';
-import { ActionIcon, Box, Button, Center, Image, Stack, Text, Title, Tooltip } from '@mantine/core';
+import {
+  ActionIcon,
+  alpha,
+  Box,
+  Button,
+  Center,
+  Image,
+  Stack,
+  Text,
+  Title,
+  Tooltip,
+} from '@mantine/core';
 import { Product } from '@/containers/Product/Product';
 import { useAddCartItem } from '@/services/cart/client';
 import { getAuthUrl } from '@/services/session/client';
@@ -33,9 +44,6 @@ export default function CampaignDetailPage() {
           <IconArrowLeft onClick={() => redirect(`/`)} />
         </ActionIcon>
       </Tooltip>
-      <Title order={1} c={campaign.config.color.primary} ta="center">
-        {campaign.title}
-      </Title>
 
       <Box>
         <Carousel
@@ -59,6 +67,12 @@ export default function CampaignDetailPage() {
         </Carousel>
       </Box>
 
+      <Box style={{ backgroundColor: alpha('#ccc', 0.1), borderRadius: '1rem' }} p={40}>
+        <Title order={1} c={campaign.config.color.primary} mb={10}>
+          {campaign.title}
+        </Title>
+        <Text fz="lg">{campaign.longDescription}</Text>
+      </Box>
       <Center>
         {general && (
           <Button
